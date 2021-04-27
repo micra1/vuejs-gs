@@ -2,6 +2,10 @@
   <div>
     <div class="top-row">
       <div class="top part">
+        <div class="robot-name">
+          {{selectedRobot.head.title}}
+        </div>
+        <span v-if="selectedRobot.head.onSale" class="sale">Sale!</span>
         <img :src="selectedRobot.head.src"
           title="head"
         />
@@ -37,90 +41,78 @@
 </template>
 
 <script>
-import availableParts from "../data/parts";
+import availableParts from '../data/parts'
 
-function getPrevValidIdx(index, length) {
-  const nextVal = index - 1;
-  return nextVal < 0 ? length - 1 : nextVal;
+function getPrevValidIdx (index, length) {
+  const nextVal = index - 1
+  return nextVal < 0 ? length - 1 : nextVal
 }
 
-function getNextValidIdx(index, length) {
-  const nextVal = index + 1;
-  return nextVal > length - 1 ? 0 : nextVal;
+function getNextValidIdx (index, length) {
+  const nextVal = index + 1
+  return nextVal > length - 1 ? 0 : nextVal
 }
 export default {
-  name: "RobotBuilder",
-  data() {
-  var data = {
+  name: 'RobotBuilder',
+  data () {
+    return {
       availableParts,
       selectedHeadIndex: 0,
       selectedLArmIndex: 0,
-      selectedRArmIndex: 0, 
+      selectedRArmIndex: 0,
       selectedTorsosIndex: 0,
       selectedBottomIndex: 0
-    };
-    
-    
-
-
-    return data;
+    }
   },
   computed: {
-    selectedRobot : function() {
-      console.log("!!!" + availableParts.heads[0].src);
-    console.log( this.selectedHeadIndex);
-    console.log( this.selectedLArmIndex);
-    console.log( this.selectedTorsosIndex);
-    console.log( this.selectedRArmIndex);
-    console.log( this.selectedBottomIndex);
-    console.log("../data" + availableParts.heads[this.selectedHeadIndex].src);
-    console.log( availableParts.arms[this.selectedLArmIndex].src);
-    console.log( availableParts.torsos[this.selectedTorsosIndex].src);
-    console.log( availableParts.arms[this.selectedRArmIndex].src);
-    console.log( availableParts.bases[this.selectedBottomIndex].src);
+    selectedRobot: function () {
+      console.log(availableParts.heads[this.selectedHeadIndex].src)
+      console.log(availableParts.arms[this.selectedLArmIndex].src)
+      console.log(availableParts.torsos[this.selectedTorsosIndex].src)
+      console.log(availableParts.arms[this.selectedRArmIndex].src)
+      console.log(availableParts.bases[this.selectedBottomIndex].src)
       return {
-        head: "../data" + availableParts.heads[this.selectedHeadIndex].src,
-        leftArm: availableParts.arms[this.selectedLArmIndex].src,
-        torsos: availableParts.torsos[this.selectedTorsosIndex].src,
-        rightArm: availableParts.arms[this.selectedRArmIndex].src,
-        bottom: availableParts.bases[this.selectedBottomIndex].src
-      };
+        head: availableParts.heads[this.selectedHeadIndex],
+        leftArm: availableParts.arms[this.selectedLArmIndex],
+        torsos: availableParts.torsos[this.selectedTorsosIndex],
+        rightArm: availableParts.arms[this.selectedRArmIndex],
+        bottom: availableParts.bases[this.selectedBottomIndex]
+      }
     }
   },
   methods: {
-    
-    nextHead() {
+    nextHead () {
       this.selectedHeadIndex = getNextValidIdx(this.selectedHeadIndex, availableParts.heads.length)
     },
-    prevHead() {
+    prevHead () {
       this.selectedHeadIndex = getPrevValidIdx(this.selectedHeadIndex, availableParts.heads.length)
     },
-    nextLArm() {
+    nextLArm () {
       this.selectedLArmIndex = getNextValidIdx(this.selectedLArmIndex, availableParts.arms.length)
     },
-    prevLArm() {
+    prevLArm () {
       this.selectedLArmIndex = getPrevValidIdx(this.selectedLArmIndex, availableParts.arms.length)
     },
-    nextRArm() {
+    nextRArm () {
       this.selectedRArmIndex = getNextValidIdx(this.selectedRArmIndex, availableParts.arms.length)
     },
-    prevRArm() {
+    prevRArm () {
       this.selectedRArmIndex = getPrevValidIdx(this.selectedRArmIndex, availableParts.arms.length)
     },
-    nextTorsos() {
-      this.selectedTorsos = getNextValidIdx(this.selectedTorsos, availableParts.torsos.length)
+    nextTorsos () {
+      this.selectedTorsosIndex = getNextValidIdx(this.selectedTorsosIndex, availableParts.torsos.length)
     },
-    prevTorsos() {
-      this.selectedTorsos = getPrevValidIdx(this.selectedTorsos, availableParts.torsos.length)
+    prevTorsos () {
+      this.selectedTorsosIndex = getPrevValidIdx(this.selectedTorsosIndex, availableParts.torsos.length)
     },
-    nextBottom() {
-      this.selectedBottom = getNextValidIdx(this.selectedBottom, availableParts.bases.length)
+    nextBottom () {
+      this.selectedBottomIndex = getNextValidIdx(this.selectedBottomIndex, availableParts.bases.length)
     },
-    prevBottom() {
-      this.selectedBottom = getPrevValidIdx(this.selectedBottom, availableParts.bases.length)
+    prevBottom () {
+      this.selectedBottomIndex = getPrevValidIdx(this.selectedBottomIndex, availableParts.bases.length)
     }
   }
-};
+}
 </script>
 
 <style>
@@ -212,5 +204,14 @@ export default {
 }
 .right .next-selector {
   right: -3px;
+}
+.robot-name {
+  position: absolute;
+  top: -25px;
+  text-align: center;
+  width: 100%;
+}
+.sale {
+  color: red;
 }
 </style>
