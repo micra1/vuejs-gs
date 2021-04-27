@@ -29,6 +29,9 @@
       <li><a href="https://github.com/vuejs/awesome-vue" target="_blank" rel="noopener">awesome-vue</a></li>
     </ul>
   </div>
+  <div class="hello">
+    <h1>{{ byeMsg }}</h1>
+  </div>
 </template>
 
 <script lang="ts">
@@ -37,7 +40,8 @@ import { defineComponent } from 'vue'
 export default defineComponent({
   name: 'HelloWorld',
   props: {
-    msg: String
+    msg: String,
+    byeMsg: String
   }
 })
 </script>
