@@ -60,7 +60,7 @@
 
 <script>
 import availableParts from '../data/parts'
-
+import createdHookMixin from './created-hook-mixin'
 function getPrevValidIdx (index, length) {
   const nextVal = index - 1
   return nextVal < 0 ? length - 1 : nextVal
@@ -72,9 +72,6 @@ function getNextValidIdx (index, length) {
 }
 export default {
   name: 'RobotBuilder',
-  created () {
-    console.log('Component created!')
-  },
   data () {
     return {
       availableParts,
@@ -86,6 +83,7 @@ export default {
       selectedBottomIndex: 0
     }
   },
+  mixins: [createdHookMixin],
   computed: {
     saleBorderClass () {
       return this.selectedRobot.head.onSale ? 'sale-border' : ''
