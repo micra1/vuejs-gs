@@ -2,7 +2,7 @@
   <div class="content">
     <button class="add-to-cart" @click="addToCart()">Add to chart</button>
     <div class="top-row">
-      <div class="top part" :style="headBorderStyle">
+      <div class="top part" :class="{'sale-border': selectedRobot.head.onSale}">
         <div class="robot-name">
           {{selectedRobot.head.title}}
         </div>
@@ -84,11 +84,6 @@ export default {
     }
   },
   computed: {
-    headBorderStyle () {
-      return {
-        border: this.selectedRobot.head.onSale ? '3px solid red' : '3px solid'
-      }
-    },
     selectedRobot () {
       console.log(availableParts.heads[this.selectedHeadIndex].src)
       console.log(availableParts.arms[this.selectedLArmIndex].src)
@@ -260,5 +255,8 @@ td,th {
 }
 .cost {
   text-align: right;
+}
+.sale-border {
+  border: 3px solid red
 }
 </style>
