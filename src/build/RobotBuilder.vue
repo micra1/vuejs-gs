@@ -72,6 +72,9 @@ function getNextValidIdx (index, length) {
 }
 export default {
   name: 'RobotBuilder',
+  created () {
+    console.log('Component created!')
+  },
   data () {
     return {
       availableParts,
@@ -88,11 +91,6 @@ export default {
       return this.selectedRobot.head.onSale ? 'sale-border' : ''
     },
     selectedRobot () {
-      console.log(availableParts.heads[this.selectedHeadIndex].src)
-      console.log(availableParts.arms[this.selectedLArmIndex].src)
-      console.log(availableParts.torsos[this.selectedTorsosIndex].src)
-      console.log(availableParts.arms[this.selectedRArmIndex].src)
-      console.log(availableParts.bases[this.selectedBottomIndex].src)
       return {
         head: availableParts.heads[this.selectedHeadIndex],
         leftArm: availableParts.arms[this.selectedLArmIndex],
